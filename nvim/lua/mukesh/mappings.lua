@@ -77,3 +77,12 @@ vim.keymap.set({ "n", "i", "v" }, "<Down>", "<Nop>")
 vim.keymap.set({ "n", "i", "v" }, "<Left>", "<Nop>")
 vim.keymap.set({ "n", "i", "v" }, "<Right>", "<Nop>")
 --------------------------------------------------------
+
+-------------------------------------------------------
+-- File Explorer: neo-tree sidebar
+------------------------------------------------------
+vim.keymap.set("n", "<leader>e", function()
+  -- Toggle sidebar on the left, revealing current file
+  vim.cmd("Neotree toggle left reveal")
+end, { desc = "File explorer (neo-tree)" })
+--------------------------------------------------------
