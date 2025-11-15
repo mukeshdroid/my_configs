@@ -25,6 +25,7 @@ end
 map("n", "<leader>ff", tbuiltin("find_files"), { desc = "Telescope: Find files" })
 map("n", "<leader>fg", tbuiltin("live_grep"),  { desc = "Telescope: Live grep" })
 map("n", "<leader>fb", tbuiltin("buffers"),    { desc = "Telescope: Buffers" })
+map("n", "<leader>fd", tbuiltin("diagnostics"),    { desc = "Telescope: Diagnostics" })
 
 -------------------------------------------------------
 
@@ -54,7 +55,7 @@ vim.keymap.set("n", "<leader>rd", rustlsp("debuggables"), {
 })
 
 -- Hover actions (richer than plain K once we configure more)
-vim.keymap.set("n", "<leader>rh", rustlsp("hover"), {
+vim.keymap.set("n", "<leader>rh", rustlsp("hover actions"), {
   desc = "Rust: Hover actions",
 })
 
@@ -68,4 +69,11 @@ vim.keymap.set("n", "<leader>rg", rustlsp("crateGraph"), {
   desc = "Rust: Crate graph",
 })
 
+------------------------------------------------------
+-- Disable Arrow keys to form better habits
+-------------------------------------------------------
+vim.keymap.set({ "n", "i", "v" }, "<Up>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<Down>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<Left>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<Right>", "<Nop>")
 --------------------------------------------------------
