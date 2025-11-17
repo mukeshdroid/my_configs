@@ -30,6 +30,41 @@ map("n", "<leader>fd", tbuiltin("diagnostics"),    { desc = "Telescope: Diagnost
 -------------------------------------------------------
 
 -----------------------------------------------------
+-- LSP navigation (all languages)
+-----------------------------------------------------
+map("n", "gd", tbuiltin("lsp_definitions"),      { desc = "LSP: Go to definition" })
+map("n", "gD", tbuiltin("lsp_type_definitions"), { desc = "LSP: Go to type definition" })
+map("n", "gi", tbuiltin("lsp_implementations"),  { desc = "LSP: Go to implementation" })
+map("n", "gr", tbuiltin("lsp_references"),       { desc = "LSP: References" })
+
+map("n", "<leader>rn", function()
+  vim.lsp.buf.rename()
+end, { desc = "LSP: Rename symbol" })
+
+map({ "n", "v" }, "<leader>ca", function()
+  vim.lsp.buf.code_action()
+end, { desc = "LSP: Code action" })
+
+map("n", "[d", function()
+  vim.diagnostic.goto_prev()
+end, { desc = "Diagnostics: Previous" })
+
+map("n", "]d", function()
+  vim.diagnostic.goto_next()
+end, { desc = "Diagnostics: Next" })
+
+-- Signature help (insert mode)
+map("i", "<C-k>", function()
+  vim.lsp.buf.signature_help()
+end, { desc = "LSP: Signature help" })
+
+-----------------------------------------------------
+-- Jump navigation (back / forward)
+-----------------------------------------------------
+vim.keymap.set("n", "gb", "<C-o>", { desc = "Jump back" })
+vim.keymap.set("n", "gn", "<C-i>", { desc = "Jump forward" })
+
+-----------------------------------------------------
 -- Rust-specific keymaps (rustaceanvim / RustLsp)
 -----------------------------------------------------
 
