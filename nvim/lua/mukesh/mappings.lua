@@ -121,3 +121,12 @@ vim.keymap.set("n", "<leader>e", function()
   vim.cmd("Neotree toggle left reveal")
 end, { desc = "File explorer (neo-tree)" })
 --------------------------------------------------------
+
+
+-----------------------------------------------------
+-- Window navigation with Alt (Meta) + hjkl
+-----------------------------------------------------
+vim.keymap.set("n", "<M-h>", "<C-w>h", { desc = "Window left" })
+vim.keymap.set("n", "<M-j>", "<C-w>j", { desc = "Window down" })
+vim.keymap.set("n", "<M-k>", "<C-w>k", { desc = "Window up" })
+vim.keymap.set("n", "<M-l>", "<C-w>l", { desc = "Window right" })
