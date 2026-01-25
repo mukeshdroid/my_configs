@@ -14,6 +14,7 @@ return {
       "vim",
       "vimdoc",
       "bash",
+      "haskell",
       "markdown",
       "markdown_inline",
       "json",

@@ -130,3 +130,39 @@ vim.keymap.set("n", "<M-h>", "<C-w>h", { desc = "Window left" })
 vim.keymap.set("n", "<M-j>", "<C-w>j", { desc = "Window down" })
 vim.keymap.set("n", "<M-k>", "<C-w>k", { desc = "Window up" })
 vim.keymap.set("n", "<M-l>", "<C-w>l", { desc = "Window right" })
+
+-----------------------------------------------------
+-- Git: gitsigns.nvim (safe, lazy-loaded)
+-----------------------------------------------------
+
+local function gitsigns(fn)
+  return function()
+    local ok, gs = pcall(require, "gitsigns")
+    if not ok then
+      vim.notify("gitsigns not found", vim.log.levels.WARN)
+      return
+    end
+    gs[fn]()
+  end
+end
+
+-- Hunk navigation (doesn't conflict with your [d ]d)
+map("n", "]c", gitsigns("next_hunk"), { desc = "Git: Next hunk" })
+map("n", "[c", gitsigns("prev_hunk"), { desc = "Git: Previous hunk" })
+
+-- Preview + diff
+map("n", "<leader>gp", gitsigns("preview_hunk"), { desc = "Git: Preview hunk" })
+map("n", "<leader>gd", gitsigns("diffthis"),     { desc = "Git: Diff this file" })
+
+-- Stage / reset
+map("n", "<leader>gs", gitsigns("stage_hunk"),   { desc = "Git: Stage hunk" })
+map("n", "<leader>gr", gitsigns("reset_hunk"),   { desc = "Git: Reset hunk" })
+map("n", "<leader>gS", gitsigns("stage_buffer"), { desc = "Git: Stage buffer" })
+map("n", "<leader>gR", gitsigns("reset_buffer"), { desc = "Git: Reset buffer" })
+
+-- Blame
+map("n", "<leader>gb", gitsigns("blame_line"),   { desc = "Git: Blame line" })
+map("n", "<leader>gB", gitsigns("toggle_current_line_blame"), { desc = "Git: Toggle line blame" })
+
+-- Toggle deleted lines in buffer (handy when reviewing)
+map("n", "<leader>gD", gitsigns("toggle_deleted"), { desc = "Git: Toggle deleted" })
