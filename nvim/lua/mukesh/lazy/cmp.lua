@@ -34,7 +34,7 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- accept current item
+          ["<CR>"] = cmp.mapping.confirm({ select = false }), -- only confirm if user explicitly selected an item
 
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then

@@ -2,6 +2,7 @@ return {
   -- Statusline
   {
     "nvim-lualine/lualine.nvim",
+    version = "*", -- auto-update to latest stable
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()

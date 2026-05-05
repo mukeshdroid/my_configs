@@ -46,11 +46,11 @@ map({ "n", "v" }, "<leader>ca", function()
 end, { desc = "LSP: Code action" })
 
 map("n", "[d", function()
-  vim.diagnostic.goto_prev()
+  vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Diagnostics: Previous" })
 
 map("n", "]d", function()
-  vim.diagnostic.goto_next()
+  vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Diagnostics: Next" })
 
 -- Signature help (insert mode)

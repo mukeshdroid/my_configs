@@ -13,7 +13,11 @@ return {
       -- Format on save for everything that has a formatter
       vim.api.nvim_create_autocmd("BufWritePre", {
         callback = function(args)
-          require("conform").format({ bufnr = args.buf })
+          require("conform").format({
+            bufnr = args.buf,
+            timeout_ms = 1000,
+            lsp_format = "fallback",
+          })
         end,
       })
     end,

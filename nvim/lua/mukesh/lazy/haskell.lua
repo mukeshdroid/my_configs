@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    version = "*", -- auto-update to latest stable
     ft = { "haskell", "lhaskell", "cabal" },
     config = function()
       local capabilities

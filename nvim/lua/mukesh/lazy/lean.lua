@@ -1,5 +1,6 @@
 return {
   'Julian/lean.nvim',
+  version = "*", -- auto-update to latest stable
   event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
 
   dependencies = {
