@@ -51,12 +51,13 @@ ghostty:
 # - if dst is a real file or directory, refuse and tell the user
 define link
 	src="$(1)"; dst="$(2)"; \
+	mkdir -p "$$(dirname "$$dst")"; \
 	if [ -L "$$dst" ]; then \
 	  current=$$(readlink "$$dst"); \
 	  if [ "$$current" = "$$src" ]; then \
 	    echo "[ok]    $$dst"; \
 	  else \
-	    ln -sfn "$$src" "$$dst"; \
+	    ln -sfn "$$src" "$$dst" && \
 	    echo "[relink] $$dst (was $$current)"; \
 	  fi; \
 	elif [ -e "$$dst" ]; then \
@@ -64,7 +65,7 @@ define link
 	  echo "        Move it aside (e.g. mv \"$$dst\" \"$$dst.bak\") and re-run."; \
 	  exit 1; \
 	else \
-	  ln -sfn "$$src" "$$dst"; \
+	  ln -sfn "$$src" "$$dst" && \
 	  echo "[link]  $$dst"; \
 	fi
 endef

@@ -8,6 +8,8 @@ Personal config files for the tools I use daily.
 - **`zellij/`** — Zellij terminal multiplexer keybinds and config
 - **`ghostty/`** — Ghostty terminal emulator config
 
+Shell is [oh-my-zsh](https://ohmyz.sh/) with the stock `gnzh` theme (`ZSH_THEME="gnzh"` in `~/.zshrc`) and the `git` plugin. Nothing custom to track — install omz and set the theme.
+
 ## Setup on a fresh machine
 
 ```sh
