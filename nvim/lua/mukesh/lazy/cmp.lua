@@ -2,6 +2,7 @@ return {
   -- Snippet engine
   {
     "L3MON4D3/LuaSnip",
+    version = "*", -- auto-update to latest stable
     dependencies = { "rafamadriz/friendly-snippets" },
     build = "make install_jsregexp", -- optional, better regex
     config = function()

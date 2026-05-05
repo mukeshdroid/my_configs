@@ -1,35 +1,14 @@
 return {
   "nvim-treesitter/nvim-treesitter",
 
-  build = ":TSUpdate",
+  branch = "main",
 
-  event = { "BufReadPost", "BufNewFile" },
-
-  opts = {
-    highlight = { enable = true },
-    indent = { enable = true },
-
-    ensure_installed = {
-      "lua",
-      "vim",
-      "vimdoc",
-      "bash",
-      "haskell",
-      "markdown",
-      "markdown_inline",
-      "json",
-      "yaml",
-      "python",
-      "javascript",
-      "typescript",
-      "html",
-      "css",
-    },
-
-    auto_install = true,
-  },
-
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
+  config = function()
+    -- Enable highlighting and indentation via autocmd
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
+    })
   end,
 }

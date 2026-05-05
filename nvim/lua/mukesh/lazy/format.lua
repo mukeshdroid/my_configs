@@ -1,6 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
+    version = "*", -- auto-update to latest stable
     config = function()
       require("conform").setup({
         -- Add more language and their formatters here
