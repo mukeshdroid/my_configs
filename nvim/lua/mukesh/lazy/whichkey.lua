@@ -14,6 +14,8 @@ return {
       { "<leader>r", group = "Rust / Rename" },
       { "<leader>c", group = "Code" },
       { "<leader>l", group = "LazyGit" },
+      { "<leader>x", group = "Trouble (lists)" },
+      { "<leader>q", group = "Sessions (persistence)" },
     })
   end,
 }

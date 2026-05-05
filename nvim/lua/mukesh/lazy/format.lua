@@ -4,9 +4,16 @@ return {
     version = "*", -- auto-update to latest stable
     config = function()
       require("conform").setup({
-        -- Add more language and their formatters here
+        -- Required binaries on PATH: rustfmt, stylua, taplo, prettier
+        -- A missing binary is non-fatal: conform skips it and the save proceeds
+        -- (with lsp_format = "fallback" picking up Lua etc. via LSP if available).
         formatters_by_ft = {
-          rust = { "rustfmt" },
+          rust     = { "rustfmt" },
+          lua      = { "stylua" },
+          toml     = { "taplo" },
+          json     = { "prettier" },
+          yaml     = { "prettier" },
+          markdown = { "prettier" },
         },
       })
 

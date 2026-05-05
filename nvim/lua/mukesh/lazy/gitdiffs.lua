@@ -4,7 +4,7 @@ return {
     version = "*", -- auto-update to latest stable
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      -- the defaults are good; this opts block can be empty
+      current_line_blame = true, -- inline "<author>, <relative-time> - <summary>" on current line; toggle via <leader>gB
       preview_config = {
         border = "rounded",
         style = "minimal",
