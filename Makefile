@@ -1,3 +1,11 @@
+# Fresh-machine setup order:
+#   1. git clone <this-repo>
+#   2. cd <repo> && make install   (lays symlinks; targets need not exist yet)
+#   3. brew install neovim zellij ghostty stylua taplo prettier lazygit
+#   4. launch the apps — they read through the symlinks
+# Doing `make install` before installing the apps avoids Ghostty's
+# first-launch auto-config from racing against the symlink.
+
 SHELL := /bin/bash
 REPO  := $(shell pwd)
 UNAME := $(shell uname)
