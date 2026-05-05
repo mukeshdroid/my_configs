@@ -16,13 +16,29 @@ Shell is [oh-my-zsh](https://ohmyz.sh/) with the stock `gnzh` theme (`ZSH_THEME=
 git clone https://github.com/<you>/configs ~/repos/configs
 cd ~/repos/configs
 make install
-brew install neovim zellij stylua taplo prettier lazygit
-brew install --cask ghostty
+brew install neovim zellij stylua taplo prettier lazygit ripgrep fd
+brew install --cask ghostty font-jetbrains-mono-nerd-font
+xcode-select --install   # C compiler — treesitter parsers and LuaSnip jsregexp build from source
 ```
 
 Run `make install` **before** installing the apps — symlinks don't need their
 targets to exist, and doing this order avoids Ghostty's first-launch auto-config
 from racing against the symlink.
+
+After Ghostty is installed, set the font to a Nerd Font (e.g. `JetBrainsMono Nerd Font`)
+so neo-tree, web-devicons, and render-markdown icons render correctly.
+
+### Language toolchains (install only the ones you use)
+
+The nvim config wires up LSPs for Rust, Haskell, and Lean. Each needs its own toolchain — none are installed by `make install`:
+
+| Language | Install |
+|---|---|
+| Rust | `rustup` → `rustup component add rust-analyzer rustfmt clippy` |
+| Haskell | `ghcup install hls` |
+| Lean | `elan` (installs `lean` + `lake`) |
+
+If a toolchain isn't installed, the corresponding LSP just stays silent — nothing breaks.
 
 ## Makefile targets
 
