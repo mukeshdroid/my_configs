@@ -7,6 +7,7 @@ Personal config files for the tools I use daily.
 - **`nvim/`** — Neovim config (LSP for Rust/Haskell/Lean, treesitter, telescope, gitsigns, lazygit, vague colorscheme, leap motion, surround, autopairs, trouble, persistence, which-key)
 - **`zellij/`** — Zellij terminal multiplexer keybinds and config
 - **`ghostty/`** — Ghostty terminal emulator config
+- **`lazygit/`** — lazygit config (sets `editPreset: nvim-remote` so `e` on a file inside lazygit-in-nvim opens it as a tab in the host nvim via `nvr`)
 
 Shell is [oh-my-zsh](https://ohmyz.sh/) with the stock `gnzh` theme (`ZSH_THEME="gnzh"` in `~/.zshrc`) and the `git` plugin. Nothing custom to track — install omz and set the theme.
 
@@ -47,7 +48,7 @@ If a toolchain isn't installed, the corresponding LSP just stays silent — noth
 | `make install` | symlink all configs into place |
 | `make uninstall` | remove symlinks pointing into this repo (foreign links are left alone) |
 | `make status` | print the current link state for each managed path |
-| `make nvim` / `zellij` / `ghostty` | install one app's config only |
+| `make nvim` / `zellij` / `ghostty` / `lazygit` | install one app's config only |
 
 The Makefile refuses to overwrite a real file at the destination — if a path
 already has a regular file there, move it aside (e.g. `mv path path.bak`) and
@@ -63,9 +64,26 @@ nvim/
     lazy/<one file per plugin spec>
 zellij/config.kdl
 ghostty/config
+lazygit/config.yml
 Makefile
 ```
 
-Ghostty's config lives at `~/Library/Application Support/com.mitchellh.ghostty/config`
-on macOS and `~/.config/ghostty/config` elsewhere — the Makefile detects which
-to use via `uname`.
+On macOS, both Ghostty and lazygit read from `~/Library/Application Support/<app>/`
+rather than `~/.config/<app>/` (lazygit follows Apple's directory conventions
+unless `XDG_CONFIG_HOME` is exported). The Makefile detects the platform via
+`uname` and picks the right destination for each. Everything else uses
+`~/.config/<app>/` on both platforms.
+
+### `nvr` for lazygit ↔ nvim handoff
+
+The lazygit config sets `editPreset: nvim-remote`, which tells lazygit to invoke
+[`nvr`](https://github.com/mhinz/neovim-remote) when you press `e` on a file.
+`nvr` finds the host nvim via the `$NVIM` socket env var that nvim sets in its
+`:terminal` jobs and opens the file as a new tab there — no nested vim.
+
+```sh
+brew install neovim-remote
+```
+
+Without `nvr` installed (or if the config isn't loaded), lazygit falls through
+to `$EDITOR` and ends up spawning plain `vi`/`vim` inside the lazygit pane.

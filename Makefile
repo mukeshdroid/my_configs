@@ -10,17 +10,19 @@ SHELL := /bin/bash
 REPO  := $(shell pwd)
 UNAME := $(shell uname)
 
-NVIM_DIR   := $(HOME)/.config/nvim
-ZELLIJ_DIR := $(HOME)/.config/zellij
+NVIM_DIR    := $(HOME)/.config/nvim
+ZELLIJ_DIR  := $(HOME)/.config/zellij
 
 ifeq ($(UNAME),Darwin)
 GHOSTTY_DIR := $(HOME)/Library/Application Support/com.mitchellh.ghostty
+LAZYGIT_DIR := $(HOME)/Library/Application Support/lazygit
 else
 GHOSTTY_DIR := $(HOME)/.config/ghostty
+LAZYGIT_DIR := $(HOME)/.config/lazygit
 endif
 
 .DEFAULT_GOAL := help
-.PHONY: help install uninstall status nvim zellij ghostty
+.PHONY: help install uninstall status nvim zellij ghostty lazygit
 
 help:
 	@echo "Targets:"
@@ -30,8 +32,9 @@ help:
 	@echo "  nvim        install nvim config only"
 	@echo "  zellij      install zellij config only"
 	@echo "  ghostty     install ghostty config only"
+	@echo "  lazygit     install lazygit config only"
 
-install: nvim zellij ghostty
+install: nvim zellij ghostty lazygit
 	@echo "Done."
 
 nvim:
@@ -44,6 +47,10 @@ zellij:
 ghostty:
 	@mkdir -p "$(GHOSTTY_DIR)"
 	@$(call link,$(REPO)/ghostty/config,$(GHOSTTY_DIR)/config)
+
+lazygit:
+	@mkdir -p "$(LAZYGIT_DIR)"
+	@$(call link,$(REPO)/lazygit/config.yml,$(LAZYGIT_DIR)/config.yml)
 
 # link <src> <dst>
 # - if dst already points at src, do nothing
@@ -71,7 +78,7 @@ define link
 endef
 
 uninstall:
-	@for path in "$(NVIM_DIR)" "$(ZELLIJ_DIR)/config.kdl" "$(GHOSTTY_DIR)/config"; do \
+	@for path in "$(NVIM_DIR)" "$(ZELLIJ_DIR)/config.kdl" "$(GHOSTTY_DIR)/config" "$(LAZYGIT_DIR)/config.yml"; do \
 	  if [ -L "$$path" ]; then \
 	    target=$$(readlink "$$path"); \
 	    case "$$target" in \
@@ -86,7 +93,7 @@ uninstall:
 	done
 
 status:
-	@for path in "$(NVIM_DIR)" "$(ZELLIJ_DIR)/config.kdl" "$(GHOSTTY_DIR)/config"; do \
+	@for path in "$(NVIM_DIR)" "$(ZELLIJ_DIR)/config.kdl" "$(GHOSTTY_DIR)/config" "$(LAZYGIT_DIR)/config.yml"; do \
 	  if [ -L "$$path" ]; then \
 	    target=$$(readlink "$$path"); \
 	    case "$$target" in \
